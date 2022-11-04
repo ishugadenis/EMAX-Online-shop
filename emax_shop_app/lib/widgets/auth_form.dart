@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../shared/consts.dart';
 import '../screens/products_screen.dart';
+import '../providers/auth.dart';
 
 class AuthForm extends StatefulWidget {
   const AuthForm({Key? key}) : super(key: key);
@@ -11,7 +13,41 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
-  var isLogin = true;
+  var _isLogin = true;
+
+  Map<String, String> _authData = {'email': '', 'password': ''};
+  final _passwordController = TextEditingController();
+  bool _isLoading = false;
+  Future<void> _submit() async {
+    try {
+      if (!_formKey.currentState!.validate()) {
+        //invalid
+        return;
+      }
+      _formKey.currentState!.save();
+      setState(() {
+        _isLoading = true;
+      });
+      if (_isLogin) {
+        await Provider.of<Auth>(context, listen: false)
+            .login(_authData['email']!, _authData['password']!);
+      } else {
+        await Provider.of<Auth>(context, listen: false)
+            .signup(_authData['email']!, _authData['password']!);
+      }
+    } on HttpException catch (error) {
+      var erorMessage = 'Authentication failed';
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'This email is already in use';
+      }
+    } catch (eror) {
+      var errorMessage = 'Could nor authenticate you. Please try agin later';
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,55 +75,86 @@ class _AuthFormState extends State<AuthForm> {
                     height: 20,
                   ),
                   TextFormField(
-                    
                     decoration: emailInputDecoration,
+                    validator: (value) {
+                      if (value!.isEmpty || !value.contains('@')) {
+                        return 'Invalid email';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _authData['email'] = value!;
+                    },
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  if (!isLogin)
-                    TextFormField(
-                      decoration: usernameInputDecoration,
-                    ),
+                  //
+                  // if (!isLogin)
+                  //   TextFormField(
+                  //     decoration: usernameInputDecoration,
+                  //     validator: (value) {
+                  //       if (value!.isEmpty || value.length < 4) {
+                  //         return 'Username should be atleast 4 characters';
+                  //       }
+                  //       return null;
+                  //     },
+                  //   ),
                   const SizedBox(
                     height: 10,
                   ),
                   TextFormField(
                     obscureText: true,
                     decoration: passwordInputDecoration,
+                    controller: _passwordController,
+                    validator: (value) {
+                      if (value!.isEmpty || value.length < 7) {
+                        return 'Password should be atleast 7 characters';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _authData['password'] = value!;
+                    },
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  if (!isLogin)
+                  if (!_isLogin)
                     TextFormField(
                       obscureText: true,
                       decoration: cpasswordInputDecoration,
+                      validator: (value) {
+                        if (value != _passwordController.text) {
+                          return 'passwords do not match';
+                        }
+                        return null;
+                      },
                     ),
                   const SizedBox(
                     height: 15,
                   ),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(ProductsScreeen.routeName);
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    color: iconbtn_color,
-                    child: Text(isLogin ? 'Login' : 'Register',
-                        style: const TextStyle(color: Colors.white)),
-                  ),
+                  _isLoading
+                      ? const CircularProgressIndicator()
+                      : RaisedButton(
+                          onPressed: () {
+                            _submit();
+                            // Navigator.of(context)
+                            //     .pushNamed(ProductsScreeen.routeName);
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          color: iconbtn_color,
+                          child: Text(_isLogin ? 'Login' : 'Register',
+                              style: const TextStyle(color: Colors.white)),
+                        ),
                   const SizedBox(
                     height: 15,
                   ),
                   FlatButton(
                       onPressed: () {
                         setState(() {
-                          isLogin = !isLogin;
+                          _isLogin = !_isLogin;
                         });
                       },
-                      child: Text(isLogin
+                      child: Text(_isLogin
                           ? 'Create new account'
                           : 'Already have an account ?'))
                 ]),
