@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/http_exception.dart';
 import 'package:provider/provider.dart';
 import '../shared/consts.dart';
 import '../screens/products_screen.dart';
@@ -18,6 +19,24 @@ class _AuthFormState extends State<AuthForm> {
   Map<String, String> _authData = {'email': '', 'password': ''};
   final _passwordController = TextEditingController();
   bool _isLoading = false;
+
+  void _showErrorDialog(String message) {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+              title: const Text('An Error Occurred'),
+              content: Text(message),
+              actions: <Widget>[
+                FlatButton(
+                  child: const Text("Okay"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ));
+  }
+
   Future<void> _submit() async {
     try {
       if (!_formKey.currentState!.validate()) {
@@ -36,12 +55,23 @@ class _AuthFormState extends State<AuthForm> {
             .signup(_authData['email']!, _authData['password']!);
       }
     } on HttpException catch (error) {
-      var erorMessage = 'Authentication failed';
+      var errorMessage = 'Authentication failed';
       if (error.toString().contains('EMAIL_EXISTS')) {
         errorMessage = 'This email is already in use';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('WEAK_PASSWORD')) {
+        errorMessage = 'This password is too weak';
+      } else if (error.toString().contains('EMAIL NOT FOUND')) {
+        errorMessage = 'Could not find a user with that email';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'Invalid password';
       }
-    } catch (eror) {
-      var errorMessage = 'Could nor authenticate you. Please try agin later';
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      print(error);
+      var errorMessage = 'Could not authenticate you. Please try agin later';
+      _showErrorDialog(errorMessage);
     }
 
     setState(() {
