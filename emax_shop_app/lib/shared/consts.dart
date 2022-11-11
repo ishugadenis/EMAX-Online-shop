@@ -2,10 +2,25 @@
 
 import 'package:flutter/material.dart';
 
-const container_color = Color(0xDBf6f6f6);
-const iconbtn_color = Color(0xDBC4A6A6);
-const frame_color = Color(0xDBEBDAD1);
-const cat_color = Color(0XDBF5CCC3);
+const container_color = Color(0xDBD3E3E2);
+const iconbtn_color = Color(0xDBFFFFFF);
+const frame_color = Color(0xDBE1C7A5);
+const cat_color = Color(0XDBEAB875);
+const btn_color = Color(0XDB2F3435);
+const appBar_color = Color(0XDB7BC5C1);
+
+//heading style
+TextStyle hstyle = const TextStyle(
+  color: Colors.black,
+  fontSize: 21,
+  fontWeight: FontWeight.bold,
+);
+//heading2 style
+TextStyle subHstyle = const TextStyle(
+  color: Colors.black,
+  fontSize: 17,
+  fontWeight: FontWeight.bold,
+);
 
 //email
 InputDecoration emailInputDecoration = InputDecoration(
