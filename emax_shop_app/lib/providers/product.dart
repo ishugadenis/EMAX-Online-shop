@@ -37,6 +37,12 @@ class ProductList with ChangeNotifier {
         productName: 'Vitron TV',
         price: 35000,
         imageUrl: 'https://www.pngall.com/wp-content/uploads/5/Full-HD-LED-TV-PNG-Download-Image.png'),
+     Product(
+        category: 'Shoes',
+        productId: 'p4',
+        productName: 'Adidas',
+        price: 3000,
+        imageUrl: 'https://www.transparentpng.com/thumb/adidas-shoes/a4xO3G-adidas-shoes-adidas-shoe-kids-superstar-daddy-grade.png'),
   ];
 
   List<Product> get products {
