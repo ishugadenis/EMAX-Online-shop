@@ -35,16 +35,21 @@ class MyApp extends StatelessWidget {
          )
       ],
       child: MaterialApp(
-            title: 'EMAX ',
-            theme: ThemeData(
-              primarySwatch: Colors.blueGrey,
-            ),
-            home: const AuthenticationScreen(),
-            routes: {
-              ProductsScreeen.routeName: (_) => const ProductsScreeen(),
-              SpecificProductScreen.routeName: (_) => const SpecificProductScreen(),
-            }
-      ),
+          title: 'EMAX ',
+          theme: ThemeData(
+            primarySwatch: Colors.blueGrey,
+          ),
+          home:
+              //auth.isAuth ?
+              const ProductsScreeen(),
+          //: const AuthenticationScreen(),
+          routes: {
+            ProductsScreeen.routeName: (_) => const ProductsScreeen(),
+            SpecificProductScreen.routeName: (_) =>
+                const SpecificProductScreen(),
+            AdminProducts.routeName: (_) => const AdminProducts(),
+            EditProductScreen.routeName: (_) => EditProductScreen(),
+          }),
     );
   }
 }

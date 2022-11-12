@@ -51,7 +51,7 @@ class SpecificProductScreen extends StatelessWidget {
                     Text(prod.productName, style: hstyle),
                     Text('Price: Ksh${prod.price}', style: subHstyle),
                     Text(
-                      'Description: Double souled, color white, size 38',
+                      prod.description,
                       style: subHstyle,
                     ),
                     Container(
