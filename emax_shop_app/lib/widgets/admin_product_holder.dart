@@ -27,14 +27,14 @@ class AdminProductHolder extends StatelessWidget {
             children: [
               Text(prod.productName),
               Text('Ksh:${prod.price}'),
-              const Text("Size 38 , double soulled color white")
+              Text(prod.description)
             ],
           ),
         ),
         IconButton(
             onPressed: () {
               Navigator.pushNamed(context, EditProductScreen.routeName,
-                  arguments: {'id': prod.productId});
+                  arguments: prod.productId);
             },
             icon: const Icon(Icons.edit))
       ]),

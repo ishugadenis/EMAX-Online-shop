@@ -42,8 +42,7 @@ class MyApp extends StatelessWidget {
           //: const AuthenticationScreen(),
           routes: {
             ProductsScreeen.routeName: (_) => const ProductsScreeen(),
-            SpecificProductScreen.routeName: (_) =>
-                const SpecificProductScreen(),
+            SpecificProductScreen.routeName: (_) =>  const SpecificProductScreen(),
             AdminProducts.routeName: (_) => const AdminProducts(),
             EditProductScreen.routeName: (_) => EditProductScreen(),
           }),

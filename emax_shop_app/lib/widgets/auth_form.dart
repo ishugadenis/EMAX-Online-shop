@@ -21,7 +21,7 @@ class _AuthFormState extends State<AuthForm> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-          color: frame_color,
+          color: container_color,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 0),
             child: Form(
@@ -32,14 +32,13 @@ class _AuthFormState extends State<AuthForm> {
                   const CircleAvatar(
                     radius: 50,
                     backgroundColor: Colors.white,
-                    child: Icon(Icons.shopping_bag,
-                        color: iconbtn_color, size: 60),
+                    child:
+                        Icon(Icons.shopping_bag, color: appBar_color, size: 60),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
-                    
                     decoration: emailInputDecoration,
                   ),
                   const SizedBox(
@@ -74,7 +73,7 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
-                    color: iconbtn_color,
+                    color: btn_color,
                     child: Text(isLogin ? 'Login' : 'Register',
                         style: const TextStyle(color: Colors.white)),
                   ),
