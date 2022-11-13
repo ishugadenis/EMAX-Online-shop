@@ -6,10 +6,34 @@ import '../widgets/product holder.dart';
 import '../providers/product.dart';
 import 'package:provider/provider.dart';
 
-class CategoryHolder extends StatelessWidget {
+class CategoryHolder extends StatefulWidget {
   const CategoryHolder({Key? key}) : super(key: key);
 
   @override
+  State<CategoryHolder> createState() => _CategoryHolderState();
+}
+
+class _CategoryHolderState extends State<CategoryHolder> {
+  var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+         _isLoading = true; 
+      });
+      Provider.of<ProductList>(context).fetchAndSetProducts().then((_){
+        setState(() {
+          _isLoading =false; 
+        });
+       
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   Widget build(BuildContext context) {
     final cats = Provider.of<Categories>(context).cat;
     //final cat = Provider.of<Category>(context);
@@ -31,13 +55,20 @@ class CategoryHolder extends StatelessWidget {
                     child: Text(e.category),
                   ),
                   Expanded(
-                    child: ListView.builder(
+                    child:_isLoading ? const Center(
+                      child:CircularProgressIndicator() ,): ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-                          value: prods.firstWhere((element) => element.category == e.category),
-                           child: ProductHolder()),
-                      itemCount: prods.where((element) => element.category == e.category).length,
+                          value: prods
+                              .where(
+                                  (element) => element.category == e.category)
+                              .toList()[i],
+                          child: 
+                        const ProductHolder()),
+                      itemCount: prods
+                          .where((element) => element.category == e.category)
+                          .length,
                     ),
                   )
                 ]),
