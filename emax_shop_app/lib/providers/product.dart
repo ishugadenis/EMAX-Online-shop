@@ -123,27 +123,39 @@ class ProductList with ChangeNotifier {
     if (prodIndex >= 0) {
       final url =
           'https://emax-shop-default-rtdb.firebaseio.com/products/$id.json';
-          try{
-             await http.patch(Uri.parse(url), body: json.encode({
-         'productName': newProduct.productName,
-            'category': newProduct.category,
-            'price': newProduct.price,
-            'imageUrl': newProduct.imageUrl,
-            'descrption': newProduct.description,
-      }));
-      _products[prodIndex] = newProduct;
-      notifyListeners();
-          }catch(error){
-            throw error;
-          }
-     
+      try {
+        await http.patch(Uri.parse(url),
+            body: json.encode({
+              'productName': newProduct.productName,
+              'category': newProduct.category,
+              'price': newProduct.price,
+              'imageUrl': newProduct.imageUrl,
+              'descrption': newProduct.description,
+            }));
+        _products[prodIndex] = newProduct;
+        notifyListeners();
+      } catch (error) {
+        throw error;
+      }
     } else {
       print('...');
     }
   }
 
   void deleteProduct(String id) {
-    _products.removeWhere((element) => element.productId == id);
+    final url =
+        'https://emax-shop-default-rtdb.firebaseio.com/products/$id.json';
+    final existingProductIndex =
+        _products.indexWhere((element) => element.productId == id);
+    Product? existingProduct = _products[existingProductIndex];
+    // _products.removeWhere((element) => element.productId == id);
+    _products.removeAt(existingProductIndex);
+    notifyListeners();
+    http.delete(Uri.parse(url)).then((_){
+      existingProduct = null;
+    }).catchError((_) {
+      _products.insert(existingProductIndex, existingProduct!);
+    });
     notifyListeners();
   }
 }
