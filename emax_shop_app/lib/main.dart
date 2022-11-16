@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import './providers/product.dart';
 import './providers/category.dart';
+import 'screens/cart_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
             routes: {
               ProductsScreeen.routeName: (_) => const ProductsScreeen(),
               SpecificProductScreen.routeName: (_) => const SpecificProductScreen(),
+              CartScreen.routeName: (_) => const CartScreen(),
             }
       ),
     );
