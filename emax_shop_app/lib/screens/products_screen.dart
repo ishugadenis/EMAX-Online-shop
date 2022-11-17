@@ -13,8 +13,8 @@ class ProductsScreeen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('EMAX',
-            style: TextStyle(
-                color: iconbtn_color, fontWeight: FontWeight.bold)),
+            style:
+                TextStyle(color: iconbtn_color, fontWeight: FontWeight.bold)),
         backgroundColor: container_color,
         actions: const [
           Icon(
@@ -24,10 +24,8 @@ class ProductsScreeen extends StatelessWidget {
           )
         ],
       ),
-      body: CategoryHolder(
-      ),
-      
-      
+      body: CategoryHolder(),
+
       // Center(
       //     child: RaisedButton(
       //   onPressed: () {
