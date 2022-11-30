@@ -11,11 +11,13 @@ class ProductsScreeen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       drawer: AppDrawer(),
-      appBar: CustomAppBar(),
-      body:  CategoryHolder(),
-
+      appBar:CustomAppBar(),
+      body: CategoryHolder(
+      ),
+      
+      
       // Center(
       //     child: RaisedButton(
       //   onPressed: () {
