@@ -1,4 +1,5 @@
 import 'package:emax_shop_app/screens/admin%20_products_%20screen.dart';
+import 'package:emax_shop_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import '../screens/products_screen.dart';
 import '../shared/consts.dart';
@@ -28,20 +29,26 @@ class AppDrawer extends StatelessWidget {
           thickness: 1.0,
         ),
         InkWell(
-          onTap: (){
-             Navigator.of(context).pushReplacementNamed(ProductsScreeen.routeName);
-          } ,
+          onTap: () {
+            Navigator.of(context)
+                .pushReplacementNamed(ProductsScreeen.routeName);
+          },
           child: const ListTile(
             leading: Text('Shop'),
             trailing: Icon(Icons.shop),
           ),
         ),
-         const Divider(
+        const Divider(
           thickness: 1.0,
         ),
-        const ListTile(
-          leading: Text('Cart'),
-          trailing: Icon(Icons.shopping_cart),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
+          },
+          child: const ListTile(
+            leading: Text('Cart'),
+            trailing: Icon(Icons.shopping_cart),
+          ),
         ),
         const Divider(
           thickness: 1.0,

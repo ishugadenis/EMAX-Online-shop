@@ -2,14 +2,16 @@ import 'package:flutter/widgets.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'cart_provider.dart';
+
 class Product with ChangeNotifier {
   final String category;
   final String productId;
   final String productName;
-  final int price;
+  final double price;
   final String imageUrl;
   final String description;
-
+  
   Product({
     required this.category,
     required this.productId,
@@ -18,6 +20,7 @@ class Product with ChangeNotifier {
     required this.imageUrl,
     required this.description,
   });
+
 }
 
 class ProductList with ChangeNotifier {
@@ -79,7 +82,7 @@ class ProductList with ChangeNotifier {
             category: prodData['category'] ?? '',
             description: prodData['descrption'] ?? '',
             imageUrl: prodData['imageUrl'] ?? '',
-            price: prodData['price'] ?? 0));
+            price: prodData['price'] ?? 0.0));
       });
       _products = loadedProducts;
       notifyListeners();
@@ -151,7 +154,7 @@ class ProductList with ChangeNotifier {
     // _products.removeWhere((element) => element.productId == id);
     _products.removeAt(existingProductIndex);
     notifyListeners();
-    http.delete(Uri.parse(url)).then((_){
+    http.delete(Uri.parse(url)).then((_) {
       existingProduct = null;
     }).catchError((_) {
       _products.insert(existingProductIndex, existingProduct!);

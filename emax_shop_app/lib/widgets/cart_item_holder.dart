@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class CartItemHolder extends StatelessWidget {
-  const CartItemHolder({
-    Key? key,
-  }) : super(key: key);
+import '../providers/cart_provider.dart';
+
+class CartItemHolder extends StatefulWidget {
+  CartItemHolder(this.itemName, this.amount, this.id, this.productId,
+      this.quantity, this.imageUrl);
+
+  final String itemName;
+  double amount;
+  final String id;
+  final String productId;
+  int quantity;
+  final String imageUrl;
 
   @override
+  State<CartItemHolder> createState() => _CartItemHolderState();
+}
+
+class _CartItemHolderState extends State<CartItemHolder> {
+  @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
-      height: MediaQuery.of(context).size.height * 0.15,
+      height: MediaQuery.of(context).size.height * 0.18,
       child: Column(
         children: [
           Expanded(
             child: Row(children: [
               Image.network(
-                'https://www.pngall.com/wp-content/uploads/5/Full-HD-LED-TV-PNG-Download-Image.png',
+                widget.imageUrl,
                 fit: BoxFit.cover,
               ),
               Expanded(
@@ -24,31 +39,50 @@ class CartItemHolder extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Item: Vitron tv'),
+                    Text('Item: ${widget.itemName}'),
                     Row(
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child: Icon(Icons.add),
+                          child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  cart.removeSingleItem(widget.id);
+                                });
+                              },
+                              icon: const Icon(Icons.remove,
+                              
+                              )),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child: Text('5'),
+                          child: Text('${widget.quantity}'),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child: Icon(Icons.remove),
+                          child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  cart.addItem(widget.id, widget.amount,
+                                      widget.imageUrl, widget.itemName);
+                                });
+                              },
+                              icon: const Icon(Icons.add)),
                         )
                       ],
                     ),
-                    Text('Price: Ksh.35000')
+                    Text('Price: ${cart.productAmount}')
                   ],
                 ),
               ),
-              const Icon(Icons.delete)
+              IconButton(
+                  onPressed: () {
+                    cart.removeItem(widget.id);
+                  },
+                  icon: const Icon(Icons.delete))
             ]),
           ),
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.black,
           ),

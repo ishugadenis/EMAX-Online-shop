@@ -62,6 +62,7 @@ class SpecificProductScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         onPressed: () {},
+                        // ignore: sort_child_properties_last
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: const Text(

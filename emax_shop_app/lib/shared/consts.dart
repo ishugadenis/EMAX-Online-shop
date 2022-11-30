@@ -24,7 +24,7 @@ TextStyle subHstyle = const TextStyle(
 
 //email
 InputDecoration emailInputDecoration = InputDecoration(
-  fillColor: container_color,
+  fillColor: Colors.white,
   label: const Text('Email address'),
   //hintText: 'Email address',
   filled: true,
@@ -41,7 +41,7 @@ InputDecoration emailInputDecoration = InputDecoration(
 
 //username
 InputDecoration usernameInputDecoration = InputDecoration(
-  fillColor: container_color,
+  fillColor: Colors.white,
   label: const Text('Username'),
   //hintText: 'username',
   filled: true,
@@ -58,7 +58,7 @@ InputDecoration usernameInputDecoration = InputDecoration(
 
 //password
 InputDecoration passwordInputDecoration = InputDecoration(
-  fillColor: container_color,
+  fillColor: Colors.white,
   label: const Text('password'),
   // hintText: 'password',
   filled: true,
@@ -75,7 +75,7 @@ InputDecoration passwordInputDecoration = InputDecoration(
 
 //confirmpassword
 InputDecoration cpasswordInputDecoration = InputDecoration(
-  fillColor: container_color,
+  fillColor: Colors.white,
   label: const Text('confirm password'),
   // hintText: 'confirm password',
   filled: true,

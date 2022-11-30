@@ -105,7 +105,6 @@ class _AuthFormState extends State<AuthForm> {
                     height: 20,
                   ),
                   TextFormField(
-                    
                     decoration: emailInputDecoration,
                     validator: (value) {
                       if (value!.isEmpty || !value.contains('@')) {
@@ -164,12 +163,19 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   RaisedButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(ProductsScreeen.routeName);
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      // Navigator.of(context)
+                      //     .pushNamed(ProductsScreeen.routeName);
+                      _submit();
+                       setState(() {
+                        _isLoading = false;
+                      });
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
-                    color: iconbtn_color,
+                    color: btn_color,
                     child: Text(_isLogin ? 'Login' : 'Register',
                         style: const TextStyle(color: Colors.white)),
                   ),
