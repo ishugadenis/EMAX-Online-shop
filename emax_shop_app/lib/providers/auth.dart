@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Auth with ChangeNotifier {
-  String? _token;
+  String?
+  _token;
   DateTime? _expiryDate;
   String? _userId;
 

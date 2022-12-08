@@ -41,11 +41,12 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(builder: (ctx, auth, _) =>
              MaterialApp(
+              
               title: 'EMAX ',
               theme: ThemeData(
                 primarySwatch: Colors.blueGrey,
               ),
-              home: !auth.isAuth ?
+              home: auth.isAuth ?
                 const ProductsScreeen()
             : const AuthenticationScreen(),
               routes: {
