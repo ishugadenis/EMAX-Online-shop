@@ -1,5 +1,7 @@
 import 'package:emax_shop_app/shared/consts.dart';
+import 'package:flutter/services.dart';
 
+import '../providers/orders.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/cart_item_holder.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,9 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: appBar_color,
+        statusBarIconBrightness: Brightness.dark));
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       drawer: const AppDrawer(),
@@ -48,7 +53,10 @@ class CartScreen extends StatelessWidget {
                 const Spacer(),
                 Text('Ksh ${cart.totalAmount}'),
                 FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<Orders>(context, listen:false).addOrder( cart.items.values.toList(), cart.totalAmount);
+                      cart.clear();
+                    },
                     child: const Text(
                       'ORDER NOW',
                       style: TextStyle(color: Colors.amberAccent),

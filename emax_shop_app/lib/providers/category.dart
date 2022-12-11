@@ -21,9 +21,5 @@ class Categories with ChangeNotifier {
     return [..._cat];
   }
 
-  //   @override
-  // void notifyListeners() {
-  //   // TODO: implement notifyListeners
-  //   super.notifyListeners();
-  // }
+
 }

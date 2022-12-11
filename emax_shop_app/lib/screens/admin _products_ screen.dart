@@ -17,13 +17,14 @@ class AdminProducts extends StatefulWidget {
 }
 
 class _AdminProductsState extends State<AdminProducts> {
-
-  Future<void> _refreshIndicator()async{
-    await Provider.of<ProductList>(context, listen:false).fetchAndSetProducts();
+  Future<void> _refreshIndicator() async {
+    await Provider.of<ProductList>(context, listen: false)
+        .fetchAndSetProducts();
   }
+
   @override
   Widget build(BuildContext context) {
-    final prods = Provider.of<ProductList>(context).products;   
+    final prods = Provider.of<ProductList>(context).products;
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
@@ -31,7 +32,7 @@ class _AdminProductsState extends State<AdminProducts> {
         title: const Text("Manage Products"),
       ),
       body: RefreshIndicator(
-        onRefresh:_refreshIndicator,
+        onRefresh: _refreshIndicator,
         child: Column(
           children: [
             Container(
@@ -41,7 +42,9 @@ class _AdminProductsState extends State<AdminProducts> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     Text('<<<<<'),
-                    Text('Swipe to remove product')
+                    Text(
+                      'Swipe to remove product',
+                    )
                   ]),
             ),
             Expanded(

@@ -1,6 +1,7 @@
 import 'package:emax_shop_app/shared/consts.dart';
 import 'package:emax_shop_app/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/product.dart';
@@ -12,6 +13,9 @@ class SpecificProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: appBar_color,
+        statusBarIconBrightness: Brightness.dark));
     final routeArgs = ModalRoute.of(context)!.settings.arguments as dynamic;
     final prod = Provider.of<ProductList>(context).products.firstWhere(
           (element) => element.productId == routeArgs['id'],

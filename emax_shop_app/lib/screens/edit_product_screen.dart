@@ -2,6 +2,7 @@
 
 import 'package:emax_shop_app/shared/consts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/product.dart';
@@ -141,6 +142,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: appBar_color,
+        statusBarIconBrightness: Brightness.dark));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appBar_color,

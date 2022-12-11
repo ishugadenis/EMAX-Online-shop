@@ -1,6 +1,7 @@
 import 'package:emax_shop_app/screens/admin%20_products_%20screen.dart';
 import 'package:emax_shop_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
+import '../screens/orders_screen.dart';
 import '../screens/products_screen.dart';
 import '../shared/consts.dart';
 
@@ -15,12 +16,12 @@ class AppDrawer extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.7,
       backgroundColor: container_color,
       child: Column(children: [
-        const SizedBox(
-          height: 60,
+        SizedBox(
+          height: MediaQuery.of(context).size.width * 0.2,
         ),
-        const CircleAvatar(
-          radius: 30,
-          child: Icon(Icons.shopping_bag),
+        CircleAvatar(
+          radius: MediaQuery.of(context).size.width * 0.1,
+          child: const Icon(Icons.shopping_bag),
         ),
         const SizedBox(
           height: 20,
@@ -48,6 +49,18 @@ class AppDrawer extends StatelessWidget {
           child: const ListTile(
             leading: Text('Cart'),
             trailing: Icon(Icons.shopping_cart),
+          ),
+        ),
+        const Divider(
+          thickness: 1.0,
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed(OrdersScreen.routeName);
+          },
+          child: const ListTile(
+            leading: Text('Orders'),
+            trailing: Icon(Icons.payment),
           ),
         ),
         const Divider(

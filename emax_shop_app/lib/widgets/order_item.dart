@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import '../providers/orders.dart' as ord;
 
 class OrderItem extends StatefulWidget {
-  // const OrderItem({Key? key}) : super(key: key);
   final ord.OrderItem order;
-  OrderItem(this.order);
+  const OrderItem(this.order, {Key? key}) : super(key: key);
 
   @override
   State<OrderItem> createState() => _OrderItemState();
@@ -18,7 +17,7 @@ class _OrderItemState extends State<OrderItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -51,9 +50,9 @@ class _OrderItemState extends State<OrderItem> {
                               ),
                             ),
                             Text(
-                              '${prod.quantity}x \$${prod.price}',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.grey),
+                              '${prod.quantity}x Ksh.${prod.price}',
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.grey),
                             )
                           ],
                         ))

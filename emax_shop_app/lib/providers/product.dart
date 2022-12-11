@@ -2,8 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'cart_provider.dart';
-
 class Product with ChangeNotifier {
   final String category;
   final String productId;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../models/http_exception.dart';
 import 'package:provider/provider.dart';
 import '../shared/consts.dart';
-import '../screens/products_screen.dart';
 import '../providers/auth.dart';
 
 class AuthForm extends StatefulWidget {
