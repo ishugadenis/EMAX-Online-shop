@@ -10,7 +10,7 @@ on:
 name: "Build & Release"
 jobs:
   build:
-    name: Run flutter test and analyze
+    name: Run flutter pub_get and flutter_Run
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v1
@@ -21,7 +21,7 @@ jobs:
         with:
           flutter-version: '3.3.0'
       - run: flutter pub get
-      - run: flutter test
+      - run: flutter run
       - name: Push to Realeases
         uses: ncipollo/release-action@v1
         with:
