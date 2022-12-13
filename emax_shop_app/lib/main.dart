@@ -1,3 +1,5 @@
+// ignore_for_file: missing_required_param, unnecessary_null_comparison
+
 import 'package:emax_shop_app/providers/cart_provider.dart';
 import 'package:emax_shop_app/screens/admin%20_products_%20screen.dart';
 import 'package:emax_shop_app/screens/edit_product_screen.dart';
@@ -23,48 +25,46 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
-        statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
-    return  MultiProvider(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark));
+    return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(
-         value: ProductList(),
-        ),
         ChangeNotifierProvider.value(
           value: Auth(),
         ),
+        ChangeNotifierProxyProvider<Auth, ProductList>(
+          update: (ctx, auth, previousProducts) => ProductList(auth.token!,
+              previousProducts == null ? [] : previousProducts.products),
+        ),
         ChangeNotifierProvider.value(
           value: Categories(),
-         ),
+        ),
         ChangeNotifierProvider.value(
           value: Cart(),
         ),
-         ChangeNotifierProvider(
-          create: (ctx)=>Orders(),
-      )
-
+        ChangeNotifierProvider(
+          create: (ctx) => Orders(),
+        )
       ],
-      child: Consumer<Auth>(builder: (ctx, auth, _) =>
-             MaterialApp(
-              
-              title: 'EMAX ',
-              theme: ThemeData(
-                primarySwatch: Colors.blueGrey,
-              ),
-              home: 
-              auth.isAuth ?
-                const ProductsScreeen()
-            : const AuthenticationScreen(),
-              routes: {
-               ProductsScreeen.routeName: (_) => const ProductsScreeen(),
+      child: Consumer<Auth>(
+        builder: (ctx, auth, _) => MaterialApp(
+            title: 'EMAX ',
+            theme: ThemeData(
+              primarySwatch: Colors.blueGrey,
+            ),
+            home: auth.isAuth
+                ? const ProductsScreeen()
+                : const AuthenticationScreen(),
+            routes: {
+              ProductsScreeen.routeName: (_) => const ProductsScreeen(),
               SpecificProductScreen.routeName: (_) =>
                   const SpecificProductScreen(),
               AdminProducts.routeName: (_) => const AdminProducts(),
               EditProductScreen.routeName: (_) => EditProductScreen(),
               CartScreen.routeName: (_) => const CartScreen(),
               OrdersScreen.routeName: (_) => const OrdersScreen(),
-              }
-        ),
+            }),
       ),
     );
   }

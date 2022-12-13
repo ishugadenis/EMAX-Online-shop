@@ -1,6 +1,5 @@
 import 'package:emax_shop_app/shared/consts.dart';
 import 'package:flutter/services.dart';
-
 import '../providers/orders.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/cart_item_holder.dart';

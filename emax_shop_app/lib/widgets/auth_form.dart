@@ -1,8 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../models/http_exception.dart';
 import 'package:provider/provider.dart';
 import '../shared/consts.dart';
 import '../providers/auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthForm extends StatefulWidget {
   const AuthForm({Key? key}) : super(key: key);
@@ -12,6 +18,16 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
+  final storage = const FlutterSecureStorage();
+  // Future<void> readFromStorage() async {
+  //   email = await storage.read(key: "EMAIL") ?? '';
+  //   password = await storage.read(key: "PASSWORD") ?? '';
+  //   await Provider.of<Auth>(context, listen: false).login(email, password);
+  // }
+
+  // late String email;
+  // late String password;
+
   final _formKey = GlobalKey<FormState>();
   var _isLogin = true;
 
@@ -49,6 +65,9 @@ class _AuthFormState extends State<AuthForm> {
       if (_isLogin) {
         await Provider.of<Auth>(context, listen: false)
             .login(_authData['email']!, _authData['password']!);
+       
+        // await storage.write(key: "EMAIL", value: email);
+        // await storage.write(key: "PASSWORD", value: password);
       } else {
         await Provider.of<Auth>(context, listen: false)
             .signup(_authData['email']!, _authData['password']!);
@@ -77,6 +96,13 @@ class _AuthFormState extends State<AuthForm> {
       _isLoading = false;
     });
   }
+
+
+  // @override
+  // void initState() {
+  //   readFromStorage();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +139,7 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     onSaved: (value) {
                       _authData['email'] = value!;
+                    //  email = value;
                     },
                   ),
                   //
@@ -141,6 +168,7 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     onSaved: (value) {
                       _authData['password'] = value!;
+                    //  password = value;
                     },
                   ),
                   const SizedBox(
@@ -168,7 +196,7 @@ class _AuthFormState extends State<AuthForm> {
                       // Navigator.of(context)
                       //     .pushNamed(ProductsScreeen.routeName);
                       _submit();
-                       setState(() {
+                      setState(() {
                         _isLoading = false;
                       });
                     },

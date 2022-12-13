@@ -9,7 +9,7 @@ class Product with ChangeNotifier {
   final double price;
   final String imageUrl;
   final String description;
-  
+
   Product({
     required this.category,
     required this.productId,
@@ -18,7 +18,6 @@ class Product with ChangeNotifier {
     required this.imageUrl,
     required this.description,
   });
-
 }
 
 class ProductList with ChangeNotifier {
@@ -58,6 +57,9 @@ class ProductList with ChangeNotifier {
     //     description: 'Size 38, Color white, Double souled'),
   ];
 
+  final String authToken;
+  ProductList(this.authToken, this._products);
+
   List<Product> get products {
     return [..._products];
   }
@@ -67,7 +69,8 @@ class ProductList with ChangeNotifier {
   }
 
   Future<void> fetchAndSetProducts() async {
-    const url = 'https://emax-shop-default-rtdb.firebaseio.com/products.json';
+    final url =
+        'https://emax-shop-default-rtdb.firebaseio.com/products.json?auth=$authToken';
     try {
       final response = await http.get(Uri.parse(url));
       print(json.decode(response.body));

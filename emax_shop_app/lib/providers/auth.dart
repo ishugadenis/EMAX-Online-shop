@@ -8,9 +8,12 @@ class Auth with ChangeNotifier {
   DateTime? _expiryDate;
   String? _userId;
 
+
   bool get isAuth {
     return token != null;
+  
   }
+
 
   String? get token {
     if (_expiryDate != null &&
@@ -42,7 +45,9 @@ class Auth with ChangeNotifier {
       _expiryDate = DateTime.now()
        .add(Duration(seconds: int.parse(responseData['expiresIn'])));
       notifyListeners();
+
     } catch (error) {
+      print(error);
       throw error;
     }
   }
@@ -51,7 +56,7 @@ class Auth with ChangeNotifier {
     return _authenticate(email, password, 'accounts:signUp');
   }
 
-  Future<void> login(String email, String password) async {
+  Future<void>login(String email, String password) async {
     return _authenticate(email, password, 'accounts:signInWithPassword');
   }
 }

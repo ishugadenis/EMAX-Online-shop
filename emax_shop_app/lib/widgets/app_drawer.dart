@@ -1,6 +1,7 @@
 import 'package:emax_shop_app/screens/admin%20_products_%20screen.dart';
 import 'package:emax_shop_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../screens/orders_screen.dart';
 import '../screens/products_screen.dart';
 import '../shared/consts.dart';
@@ -78,9 +79,17 @@ class AppDrawer extends StatelessWidget {
         const Divider(
           thickness: 1.0,
         ),
-        const ListTile(
-          leading: Text('Log out'),
-          trailing: Icon(Icons.logout),
+        InkWell(
+          onTap: () {
+            FlutterSecureStorage storage = const FlutterSecureStorage();
+            storage.delete(key: 'EMAIL');
+            storage.delete(key: 'PASSWORD');
+
+          },
+          child: const ListTile(
+            leading: Text('Log out'),
+            trailing: Icon(Icons.logout),
+          ),
         ),
       ]),
     );

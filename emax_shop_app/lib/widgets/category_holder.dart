@@ -51,7 +51,7 @@ class _CategoryHolderState extends State<CategoryHolder> {
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     color: btn_color,
-                     width: double.infinity,
+                    width: double.infinity,
                     alignment: Alignment.center,
                     child: Text(
                       e.category,
