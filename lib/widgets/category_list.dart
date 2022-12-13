@@ -1,6 +1,3 @@
-import 'package:emax_shop_app/widgets/category_holder.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 // import '../providers/category.dart';
 

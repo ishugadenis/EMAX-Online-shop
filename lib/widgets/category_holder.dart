@@ -1,12 +1,13 @@
-import 'package:emax_shop_app/providers/category.dart';
-import 'package:emax_shop_app/shared/consts.dart';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:emax_shop_app/widgets/product%20holder.dart';
 import 'package:flutter/material.dart';
 import '../providers/product.dart';
 import 'package:provider/provider.dart';
 
 class CategoryHolder extends StatelessWidget {
-  //const CategoryHolder({Key? key}) : super(key: key);
+  const CategoryHolder({Key? key}) : super(key: key);
+
   // Category category;
   // CategoryHolder({required this.category});
 

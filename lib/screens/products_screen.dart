@@ -1,8 +1,6 @@
-import '../screens/specicfic_product_scree.dart';
 import 'package:flutter/material.dart';
 import '../shared/consts.dart';
 import '../widgets/category_holder.dart';
-import '../widgets/category_list.dart';
 
 class ProductsScreeen extends StatelessWidget {
   const ProductsScreeen({Key? key}) : super(key: key);
@@ -24,7 +22,7 @@ class ProductsScreeen extends StatelessWidget {
           )
         ],
       ),
-      body: CategoryHolder(
+      body: const CategoryHolder(
       ),
       
       

@@ -1,5 +1,3 @@
-import 'package:emax_shop_app/shared/consts.dart';
-
 import '../widgets/auth_form.dart';
 import 'package:flutter/material.dart';
 

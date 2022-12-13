@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, must_be_immutable, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/product.dart';
@@ -6,7 +8,7 @@ import '../shared/consts.dart';
 class ProductHolder extends StatelessWidget {
   // const ProductHolder({Key? key}) : super(key: key);
   Product product;
-  ProductHolder({required this.product});
+  ProductHolder({Key? key, required this.product}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final prod = Provider.of<Product>(context);
