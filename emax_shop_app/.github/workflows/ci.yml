@@ -1,53 +1,31 @@
-name: ci
 on:
   pull_request:
     branches:
-      - master
-
+      - main
+      - release
+  push:
+    branches:
+      - main
+      - release
+name: "Build & Release"
 jobs:
-  flutter_test:
-    name: Run flutter test and analyze
+  build:
+    name: Build & Release
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
       - uses: actions/setup-java@v1
         with:
-          java-version: "12.x"
+          java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          channel: "stable"
+          flutter-version: '3.3.0'
       - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test
-
-  build_ios:
-    name: Build Flutter (iOS)
-    needs: [flutter_test]
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - run: flutter pub test
+      - run: flutter pub build apk --debug --split-per-abi
+      - name: Push to Realeases
+        uses: ncipollo/release-action@v1
         with:
-          java-version: "12.x"
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: "stable"
-      - run: flutter pub get
-      - run: flutter clean
-      - run: flutter build ios --release --no-codesign
-
-  build_appbundle:
-    name: Build Flutter (Android)
-    needs: [flutter_test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: "stable"
-      - run: flutter pub get
-      - run: flutter clean
-      - run: flutter build appbundle
+          artifacts: "build/app/outputs/apk/debug/*"
+          tag: v1.0.${{ github.run_number }}
+          token: ${{  secrets.TOKEN123 }}
