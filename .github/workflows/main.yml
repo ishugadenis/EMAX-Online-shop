@@ -21,7 +21,6 @@ jobs:
         with:
           flutter-version: '3.3.0'
       - run: flutter pub get
-      - run: flutter  analyze
       - run: flutter test
       - name: Push to Realeases
         uses: ncipollo/release-action@v1
