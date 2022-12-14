@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+
 
 import 'package:flutter/material.dart';
 import '../shared/consts.dart';
@@ -69,29 +69,54 @@ class _AuthFormState extends State<AuthForm> {
                   const SizedBox(
                     height: 15,
                   ),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(ProductsScreeen.routeName);
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: iconbtn_color,
+                      onPrimary: Colors.white,
+                      shape:  RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15))
+                    ),
+                    onPressed: (){
+                       Navigator.of(context)
+                         .pushNamed(ProductsScreeen.routeName);
                     },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    color: iconbtn_color,
                     child: Text(isLogin ? 'Login' : 'Register',
-                        style: const TextStyle(color: Colors.white)),
+                    )
+                
                   ),
+                  // RaisedButton(
+                  //   onPressed: () {
+                  //     Navigator.of(context)
+                  //         .pushNamed(ProductsScreeen.routeName);
+                  //   },
+                  //   shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(15)),
+                  //   color: iconbtn_color,
+                  //   child: Text(isLogin ? 'Login' : 'Register',
+                  //       style: const TextStyle(color: Colors.white)),
+                  // ),
                   const SizedBox(
                     height: 15,
                   ),
-                  FlatButton(
-                      onPressed: () {
-                        setState(() {
+                  TextButton(
+                     onPressed: (){
+                       setState(() {
                           isLogin = !isLogin;
                         });
-                      },
-                      child: Text(isLogin
+                     },
+                     child:Text(isLogin
                           ? 'Create new account'
-                          : 'Already have an account ?'))
+                          : 'Already have an account ?'),
+                  ),
+                  // FlatButton(
+                  //     onPressed: () {
+                  //       setState(() {
+                  //         isLogin = !isLogin;
+                  //       });
+                  //     },
+                  //     child: Text(isLogin
+                  //         'Create new account'
+                  //         : 'Already have an account ?'))
                 ]),
               ),
             ),
