@@ -10,7 +10,7 @@ on:
 name: "Build & Release"
 jobs:
   build:
-    name: Run flutter pub_get
+    name: Build & release
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v1
@@ -19,10 +19,10 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.3.0'
+          channel: "stable"
       - run: flutter pub get
-      # - run: flutter  analyze
-      # - run: flutter test
+      - run: flutter  analyze
+      - run: flutter test
       - name: Push to Realeases
         uses: ncipollo/release-action@v1
         with:
