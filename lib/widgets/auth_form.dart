@@ -71,7 +71,6 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      
                       primary: iconbtn_color,
                       onPrimary: Colors.white,
                       shape:  RoundedRectangleBorder(
