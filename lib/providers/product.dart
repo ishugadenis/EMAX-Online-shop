@@ -11,12 +11,12 @@ class Product with ChangeNotifier {
   final String description;
 
   Product({
-    required this.category,
-    required this.productId,
-    required this.productName,
-    required this.price,
-    required this.imageUrl,
-    required this.description,
+    @required this.category,
+    @required this.productId,
+    @required this.productName,
+    @required this.price,
+    @required this.imageUrl,
+    @required this.description,
   });
 }
 
@@ -73,7 +73,7 @@ class ProductList with ChangeNotifier {
         'https://emax-shop-default-rtdb.firebaseio.com/products.json?auth=$authToken';
     try {
       final response = await http.get(Uri.parse(url));
-      print(json.decode(response.body));
+      //  print(json.decode(response.body));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
@@ -88,7 +88,7 @@ class ProductList with ChangeNotifier {
       _products = loadedProducts;
       notifyListeners();
     } catch (error) {
-      throw (error);
+      rethrow;
     }
   }
 
@@ -104,7 +104,7 @@ class ProductList with ChangeNotifier {
             'descrption': product.description,
             //'id': product.productId
           }));
-      print(json.decode(response.body));
+      // print(json.decode(response.body));
       final newProduct = Product(
         category: product.category,
         productName: product.productName,
@@ -116,8 +116,9 @@ class ProductList with ChangeNotifier {
       _products.add(newProduct);
       notifyListeners();
     } catch (error) {
-      print(error);
-      throw (error);
+      rethrow;
+      //  print(error);
+      //throw (error);
     }
   }
 
@@ -139,10 +140,11 @@ class ProductList with ChangeNotifier {
         _products[prodIndex] = newProduct;
         notifyListeners();
       } catch (error) {
-        throw error;
+        rethrow;
+        //throw error;
       }
     } else {
-      print('...');
+     // print('...');
     }
   }
 
@@ -151,14 +153,14 @@ class ProductList with ChangeNotifier {
         'https://emax-shop-default-rtdb.firebaseio.com/products/$id.json';
     final existingProductIndex =
         _products.indexWhere((element) => element.productId == id);
-    Product? existingProduct = _products[existingProductIndex];
+    Product existingProduct = _products[existingProductIndex];
     // _products.removeWhere((element) => element.productId == id);
     _products.removeAt(existingProductIndex);
     notifyListeners();
     http.delete(Uri.parse(url)).then((_) {
       existingProduct = null;
     }).catchError((_) {
-      _products.insert(existingProductIndex, existingProduct!);
+      _products.insert(existingProductIndex, existingProduct);
     });
     notifyListeners();
   }

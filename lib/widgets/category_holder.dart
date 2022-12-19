@@ -1,13 +1,12 @@
 import 'package:emax_shop_app/providers/category.dart';
 import 'package:emax_shop_app/shared/consts.dart';
-import 'package:emax_shop_app/widgets/product%20holder.dart';
 import 'package:flutter/material.dart';
-import '../widgets/product holder.dart';
+import 'product_holder.dart';
 import '../providers/product.dart';
 import 'package:provider/provider.dart';
 
 class CategoryHolder extends StatefulWidget {
-  const CategoryHolder({Key? key}) : super(key: key);
+  const CategoryHolder({Key key}) : super(key: key);
 
   @override
   State<CategoryHolder> createState() => _CategoryHolderState();

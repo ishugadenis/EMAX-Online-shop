@@ -8,11 +8,11 @@ class CartItem with ChangeNotifier {
   final double price;
 
   CartItem({
-    required this.id,
-    required this.imageUrl,
-    required this.productName,
-    required this.quantity,
-    required this.price,
+    @required this.id,
+    @required this.imageUrl,
+    @required this.productName,
+    @required this.quantity,
+    @required this.price,
   });
 
   
@@ -92,7 +92,7 @@ class Cart with ChangeNotifier {
     if (!_items.containsKey(productId)) {
       return;
     }
-    if (_items[productId]!.quantity > 1) {
+    if (_items[productId].quantity > 1) {
       _items.update(
           productId,
           (existingCartItem) => CartItem(

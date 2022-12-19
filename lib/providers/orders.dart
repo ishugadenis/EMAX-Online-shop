@@ -1,3 +1,6 @@
+
+// ignore_for_file: prefer_final_fields
+
 import 'package:emax_shop_app/providers/cart_provider.dart';
 import 'package:flutter/widgets.dart';
 
@@ -8,10 +11,10 @@ class OrderItem with ChangeNotifier {
   final DateTime dateTime;
 
   OrderItem({
-    required this.id,
-    required this.amount,
-    required this.products,
-    required this.dateTime,
+    @required this.id,
+    @required this.amount,
+    @required this.products,
+    @required this.dateTime,
   });
 }
 

@@ -1,14 +1,15 @@
-import 'package:emax_shop_app/screens/edit_product_screen.dart';
-import 'package:emax_shop_app/shared/consts.dart';
+// ignore_for_file: file_names
+
+import 'editproduct_screen.dart';
+import '../shared/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/product.dart';
 import '../widgets/admin_product_holder.dart';
 import '../widgets/app_drawer.dart';
 
 class AdminProducts extends StatefulWidget {
-  const AdminProducts({Key? key}) : super(key: key);
+  const AdminProducts({Key key}) : super(key: key);
 
   static const routeName = './admin_products_screen';
 
@@ -67,12 +68,12 @@ class _AdminProductsState extends State<AdminProducts> {
                                   content: const Text(
                                       'Are you sure you want to delete this item'),
                                   actions: [
-                                    FlatButton(
+                                    TextButton(
                                         onPressed: () {
                                           Navigator.of(context).pop(false);
                                         },
                                         child: const Text('cancel')),
-                                    FlatButton(
+                                    TextButton(
                                         onPressed: () {
                                           Navigator.of(context).pop(true);
                                         },

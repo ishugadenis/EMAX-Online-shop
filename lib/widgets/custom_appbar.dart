@@ -6,7 +6,7 @@ import '../providers/cart_provider.dart';
 import 'badge.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  const CustomAppBar({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       actions: [
         Consumer<Cart>(
           builder: (_, cart, ch) => Badge(
-            child: ch!,
             color: btn_color,
             value: cart.itemCount.toString(),
+            child: ch,
           ),
           child: IconButton(
             icon: const Icon(Icons.shopping_cart),

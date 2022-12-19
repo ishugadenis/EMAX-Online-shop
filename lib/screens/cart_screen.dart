@@ -8,7 +8,7 @@ import '../providers/cart_provider.dart' show Cart;
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key}) : super(key: key);
+  const CartScreen({Key key}) : super(key: key);
   static const routeName = './cart-screen';
 
   @override
@@ -51,7 +51,7 @@ class CartScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text('Ksh ${cart.totalAmount}'),
-                FlatButton(
+                TextButton(
                     onPressed: () {
                       Provider.of<Orders>(context, listen:false).addOrder( cart.items.values.toList(), cart.totalAmount);
                       cart.clear();

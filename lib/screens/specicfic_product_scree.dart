@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../providers/product.dart';
 
 class SpecificProductScreen extends StatelessWidget {
-  const SpecificProductScreen({Key? key}) : super(key: key);
+  const SpecificProductScreen({Key key}) : super(key: key);
 
   static const routeName = './specificScreen';
 
@@ -16,7 +16,7 @@ class SpecificProductScreen extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: appBar_color,
         statusBarIconBrightness: Brightness.dark));
-    final routeArgs = ModalRoute.of(context)!.settings.arguments as dynamic;
+    final routeArgs = ModalRoute.of(context).settings.arguments as dynamic;
     final prod = Provider.of<ProductList>(context).products.firstWhere(
           (element) => element.productId == routeArgs['id'],
         );
@@ -61,10 +61,10 @@ class SpecificProductScreen extends StatelessWidget {
                     Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.symmetric(vertical: 15),
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                      child: ElevatedButton(
+                        // shape: RoundedRectangleBorder(
+                        //   borderRadius: BorderRadius.circular(15),
+                        // ),
                         onPressed: () {},
                         // ignore: sort_child_properties_last
                         child: Container(
@@ -74,7 +74,7 @@ class SpecificProductScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        color: btn_color,
+                       // color: btn_color,
                       ),
                     )
                   ],

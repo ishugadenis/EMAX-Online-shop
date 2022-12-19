@@ -6,7 +6,7 @@ import '../providers/product.dart';
 import '../shared/consts.dart';
 
 class ProductHolder extends StatelessWidget {
-  const ProductHolder({Key? key}) : super(key: key);
+  const ProductHolder({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,6 @@ class ProductHolder extends StatelessWidget {
                       ),
                       IconButton(
                           onPressed: () {
-                            
                             cart.addItem(prod.productId, prod.price,
                                 prod.imageUrl, prod.productName);
                           },

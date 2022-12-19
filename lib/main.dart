@@ -2,7 +2,7 @@
 
 import 'package:emax_shop_app/providers/cart_provider.dart';
 import 'package:emax_shop_app/screens/admin%20_products_%20screen.dart';
-import 'package:emax_shop_app/screens/edit_product_screen.dart';
+import 'package:emax_shop_app/screens/editproduct_screen.dart';
 import './screens/specicfic_product_scree.dart';
 import './screens/products_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,8 @@ class MyApp extends StatelessWidget {
           value: Auth(),
         ),
         ChangeNotifierProxyProvider<Auth, ProductList>(
-          update: (ctx, auth, previousProducts) => ProductList(auth.token!,
+          //create: (_) =>ProductList(),
+          update: (ctx, auth, previousProducts) => ProductList(auth.token,
               previousProducts == null ? [] : previousProducts.products),
         ),
         ChangeNotifierProvider.value(
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
               SpecificProductScreen.routeName: (_) =>
                   const SpecificProductScreen(),
               AdminProducts.routeName: (_) => const AdminProducts(),
-              EditProductScreen.routeName: (_) => EditProductScreen(),
+              EditProductScreen.routeName: (_) => const EditProductScreen(),
               CartScreen.routeName: (_) => const CartScreen(),
               OrdersScreen.routeName: (_) => const OrdersScreen(),
             }),

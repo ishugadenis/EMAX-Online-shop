@@ -4,25 +4,23 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Auth with ChangeNotifier {
-  String? _token;
-  DateTime? _expiryDate;
-  String? _userId;
-
+  String _token;
+  DateTime _expiryDate;
+ // String? _userId;
 
   bool get isAuth {
     return token != null;
-  
   }
 
-
-  String? get token {
+  String get token {
     if (_expiryDate != null &&
-        _expiryDate!.isAfter(DateTime.now()) &&
+        _expiryDate.isAfter(DateTime.now()) &&
         _token != null) {
       return _token;
     }
     return null;
   }
+
 
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
@@ -36,19 +34,19 @@ class Auth with ChangeNotifier {
             'returnSecureToken': true,
           }));
       final responseData = json.decode(response.body);
-      print(json.decode(response.body));
+      // print(json.decode(response.body));
       if (responseData['error'] != null) {
         throw HttpException(responseData['email']['message']);
       }
       _token = responseData['idToken'];
-      _userId = responseData['localId'];
+     // _userId = responseData['localId'];
       _expiryDate = DateTime.now()
-       .add(Duration(seconds: int.parse(responseData['expiresIn'])));
+          .add(Duration(seconds: int.parse(responseData['expiresIn'])));
       notifyListeners();
-
     } catch (error) {
-      print(error);
-      throw error;
+      //print(error);
+      rethrow;
+     // error;
     }
   }
 
@@ -56,7 +54,7 @@ class Auth with ChangeNotifier {
     return _authenticate(email, password, 'accounts:signUp');
   }
 
-  Future<void>login(String email, String password) async {
+  Future<void> login(String email, String password) async {
     return _authenticate(email, password, 'accounts:signInWithPassword');
   }
 }

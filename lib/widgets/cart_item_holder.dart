@@ -1,11 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/cart_provider.dart';
 
 class CartItemHolder extends StatefulWidget {
-  CartItemHolder(this.itemName, this.amount, this.id, this.productId,
-      this.quantity, this.imageUrl);
+  CartItemHolder( this.itemName, this.amount, this.id, this.productId,
+      this.quantity, this.imageUrl, {Key key, } ) : super(key: key);
 
   final String itemName;
   double amount;

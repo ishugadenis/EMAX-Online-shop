@@ -5,8 +5,8 @@ class Category with ChangeNotifier {
   final String id;
 
   Category({
-    required this.category,
-    required this.id,
+    @required this.category,
+    @required this.id,
   });
 }
 

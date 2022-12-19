@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_final_fields
 
 import 'package:emax_shop_app/shared/consts.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../providers/product.dart';
 
 class EditProductScreen extends StatefulWidget {
-  EditProductScreen({Key? key}) : super(key: key);
+  const EditProductScreen({Key key}) : super(key: key);
   static const routeName = './ edit-product';
 
   @override
@@ -71,8 +70,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   Future<void> _saveForm() async {
-    final _isValid = _form.currentState?.validate();
-    if (!_isValid!) {
+    final isValid = _form.currentState?.validate();
+    if (!isValid) {
       return;
     }
     _form.currentState?.save();
@@ -95,7 +94,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   title: const Text('An error occured!'),
                   content: const Text('Something went wrong'),
                   actions: <Widget>[
-                    FlatButton(
+                    TextButton(
                       child: const Text('Okay'),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -122,7 +121,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      final productId = ModalRoute.of(context)!.settings.arguments as dynamic;
+      final productId = ModalRoute.of(context).settings.arguments as dynamic;
       if (productId != null) {
         _editedProduct = Provider.of<ProductList>(context, listen: false)
             .findById(productId);
@@ -174,14 +173,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         Focus.of(context).requestFocus(_itemFocusNode);
                       },
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (value.isEmpty) {
                           return "Please provide a value";
                         }
                         return null;
                       },
                       onSaved: (value) {
                         _editedProduct = Product(
-                            category: value!,
+                            category: value,
                             productName: _editedProduct.productName,
                             description: _editedProduct.description,
                             price: _editedProduct.price,
@@ -198,7 +197,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         Focus.of(context).requestFocus(_priceFocusNode);
                       },
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (value.isEmpty) {
                           return "Please provide a value";
                         }
                         return null;
@@ -206,7 +205,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       onSaved: (value) {
                         _editedProduct = Product(
                             category: _editedProduct.category,
-                            productName: value!,
+                            productName: value,
                             description: _editedProduct.description,
                             price: _editedProduct.price,
                             imageUrl: _editedProduct.imageUrl,
@@ -223,7 +222,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         Focus.of(context).requestFocus(_descriptionFocusNode);
                       },
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (value.isEmpty) {
                           return 'Please enter price';
                         }
                         if (double.tryParse(value) == null) {
@@ -239,7 +238,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             category: _editedProduct.category,
                             productName: _editedProduct.productName,
                             description: _editedProduct.description,
-                            price: double.parse(value!),
+                            price: double.parse(value),
                             imageUrl: _editedProduct.imageUrl,
                             productId: _editedProduct.productId);
                       },
@@ -252,7 +251,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       keyboardType: TextInputType.multiline,
                       focusNode: _descriptionFocusNode,
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (value.isEmpty) {
                           return "Please enter a description";
                         }
                         if (value.length < 10) {
@@ -264,7 +263,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         _editedProduct = Product(
                             category: _editedProduct.category,
                             productName: _editedProduct.productName,
-                            description: value!,
+                            description: value,
                             price: _editedProduct.price,
                             imageUrl: _editedProduct.imageUrl,
                             productId: _editedProduct.productId);
@@ -304,7 +303,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             controller: _imageUrlController,
                             focusNode: _imageUrlFocusNode,
                             validator: (value) {
-                              if (value!.isEmpty) {
+                              if (value.isEmpty) {
                                 return 'Please enter an image URL';
                               }
                               if (!value.startsWith('http') &&
@@ -316,6 +315,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                   !value.endsWith('.jpeg')) {
                                 return "Please enter a valid image";
                               }
+                              return null;
                             },
                             onFieldSubmitted: (_) {
                               _saveForm();
@@ -326,7 +326,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                   productName: _editedProduct.productName,
                                   description: _editedProduct.description,
                                   price: _editedProduct.price,
-                                  imageUrl: value!,
+                                  imageUrl: value,
                                   productId: _editedProduct.productId);
                             },
                           ),

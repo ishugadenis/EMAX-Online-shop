@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../widgets/category_holder.dart';
 
 class ProductsScreeen extends StatelessWidget {
-  const ProductsScreeen({Key? key}) : super(key: key);
+  const ProductsScreeen({Key key}) : super(key: key);
   static const routeName = './products_screen';
 
   @override

@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
 
@@ -8,10 +7,9 @@ import '../models/http_exception.dart';
 import 'package:provider/provider.dart';
 import '../shared/consts.dart';
 import '../providers/auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({Key? key}) : super(key: key);
+  const AuthForm({Key key}) : super(key: key);
 
   @override
   State<AuthForm> createState() => _AuthFormState();
@@ -31,9 +29,9 @@ class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   var _isLogin = true;
 
-  Map<String, String> _authData = {'email': '', 'password': ''};
+  final Map<String, String> _authData = {'email': '', 'password': ''};
   final _passwordController = TextEditingController();
-  bool _isLoading = false;
+  bool isLoading = false;
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -42,7 +40,7 @@ class _AuthFormState extends State<AuthForm> {
               title: const Text('An Error Occurred'),
               content: Text(message),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   child: const Text("Okay"),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -54,23 +52,23 @@ class _AuthFormState extends State<AuthForm> {
 
   Future<void> _submit() async {
     try {
-      if (!_formKey.currentState!.validate()) {
+      if (!_formKey.currentState.validate()) {
         //invalid
         return;
       }
-      _formKey.currentState!.save();
+      _formKey.currentState.save();
       setState(() {
-        _isLoading = true;
+        isLoading = true;
       });
       if (_isLogin) {
         await Provider.of<Auth>(context, listen: false)
-            .login(_authData['email']!, _authData['password']!);
+            .login(_authData['email'], _authData['password']);
        
         // await storage.write(key: "EMAIL", value: email);
         // await storage.write(key: "PASSWORD", value: password);
       } else {
         await Provider.of<Auth>(context, listen: false)
-            .signup(_authData['email']!, _authData['password']!);
+            .signup(_authData['email'], _authData['password']);
       }
     } on HttpException catch (error) {
       var errorMessage = 'Authentication failed';
@@ -87,13 +85,13 @@ class _AuthFormState extends State<AuthForm> {
       }
       _showErrorDialog(errorMessage);
     } catch (error) {
-      print(error);
+     // print(error);
       var errorMessage = 'Could not authenticate you. Please try agin later';
       _showErrorDialog(errorMessage);
     }
 
     setState(() {
-      _isLoading = false;
+      isLoading = false;
     });
   }
 
@@ -132,13 +130,13 @@ class _AuthFormState extends State<AuthForm> {
                   TextFormField(
                     decoration: emailInputDecoration,
                     validator: (value) {
-                      if (value!.isEmpty || !value.contains('@')) {
+                      if (value.isEmpty || !value.contains('@')) {
                         return 'Invalid email';
                       }
                       return null;
                     },
                     onSaved: (value) {
-                      _authData['email'] = value!;
+                      _authData['email'] = value;
                     //  email = value;
                     },
                   ),
@@ -161,13 +159,13 @@ class _AuthFormState extends State<AuthForm> {
                     decoration: passwordInputDecoration,
                     controller: _passwordController,
                     validator: (value) {
-                      if (value!.isEmpty || value.length < 7) {
+                      if (value.isEmpty || value.length < 7) {
                         return 'Password should be atleast 7 characters';
                       }
                       return null;
                     },
                     onSaved: (value) {
-                      _authData['password'] = value!;
+                      _authData['password'] = value;
                     //  password = value;
                     },
                   ),
@@ -188,28 +186,28 @@ class _AuthFormState extends State<AuthForm> {
                   const SizedBox(
                     height: 15,
                   ),
-                  RaisedButton(
+                 ElevatedButton (
                     onPressed: () {
                       setState(() {
-                        _isLoading = true;
+                        isLoading = true;
                       });
                       // Navigator.of(context)
                       //     .pushNamed(ProductsScreeen.routeName);
                       _submit();
                       setState(() {
-                        _isLoading = false;
+                        isLoading = false;
                       });
                     },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    color: btn_color,
+                    // shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(15)),
+                    // color: btn_color,
                     child: Text(_isLogin ? 'Login' : 'Register',
-                        style: const TextStyle(color: Colors.white)),
+                        style: const TextStyle(color: Colors.white, ) ),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  FlatButton(
+                  TextButton(
                       onPressed: () {
                         setState(() {
                           _isLogin = !_isLogin;
