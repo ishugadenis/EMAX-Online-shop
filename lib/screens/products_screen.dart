@@ -1,31 +1,25 @@
+import 'package:emax_shop_app/shared/consts.dart';
+import 'package:flutter/services.dart';
+
+import '../widgets/app_drawer.dart';
+import '../widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
-import '../shared/consts.dart';
 import '../widgets/category_holder.dart';
 
 class ProductsScreeen extends StatelessWidget {
-  const ProductsScreeen({Key? key}) : super(key: key);
+  const ProductsScreeen({Key key}) : super(key: key);
   static const routeName = './products_screen';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('EMAX',
-            style: TextStyle(
-                color: iconbtn_color, fontWeight: FontWeight.bold)),
-        backgroundColor: container_color,
-        actions: const [
-          Icon(
-            Icons.shopping_cart,
-            size: 25,
-            color: iconbtn_color,
-          )
-        ],
-      ),
-      body: const CategoryHolder(
-      ),
-      
-      
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: appBar_color,
+        statusBarIconBrightness: Brightness.dark));
+    return const Scaffold(
+      drawer: AppDrawer(),
+      appBar: CustomAppBar(),
+      body: CategoryHolder(),
+
       // Center(
       //     child: RaisedButton(
       //   onPressed: () {

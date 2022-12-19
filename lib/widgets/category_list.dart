@@ -1,22 +1,2 @@
-
-// import '../providers/category.dart';
-
-// class CategoryList extends StatelessWidget {
-//   const CategoryList({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final cat = Provider.of<Categories>(context).cat;
-
-//     return Container(
-//       height: MediaQuery.of(context).size.height *0.8,
-//         child: ListView.builder(
-//       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-//         value: cat[i],
-//         child: CategoryHolder(
-//           category: cat[i],
-//         )),
-//       itemCount: cat.length,
-//     ));
-//   }
-// }
+//https://png.pngtree.com/png-vector/20201128/ourmid/pngtree-casual-shoes-png-image_23942
+//https://w7.pngwing.com/pngs/323/773/png-transparent-sneakers-basketball-shoe-sportswear-nike-shoe-outdoor-shoe-running-sneakers-thumbnail.png

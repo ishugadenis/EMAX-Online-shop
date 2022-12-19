@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'editproduct_screen.dart';
+import '../screens/edit_product_screen.dart';
 import '../shared/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,4 @@
-import 'package:emax_shop_app/screens/specicfic_product_scree.dart';
+import 'package:emax_shop_app/screens/specicfic_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart_provider.dart';

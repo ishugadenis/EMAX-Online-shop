@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/product.dart';
-import '../screens/editproduct_screen.dart';
+import '../screens/edit_product_screen.dart';
 
 class AdminProductHolder extends StatelessWidget {
   const AdminProductHolder({
